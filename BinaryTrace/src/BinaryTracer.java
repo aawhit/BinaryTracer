@@ -55,13 +55,15 @@ public class BinaryTracer
 		target = (int) newArray.get(target);
 		System.out.println("The target is: " + target);
 		}
+	
 	public static int findTarget()
 		{
 		int left = 0;
 		int right = newArray.size() - 1;
-		while (left <= right)
+		int middle = (left + right) / 2;
+		boolean Continue = true;
+		while (Continue)
 			{
-			int middle = (left + right) / 2;
 			if (target < (int)newArray.get(middle))
 				{
 				right = middle - 1;
