@@ -10,9 +10,9 @@ public class BinaryTracer
 	private static int middle;
 	private static int right;
 	private static int arrayMiddle;
-	private static int userLeft;
-	private static int userRight;
-	private static int userMiddle;
+	private static int leftAnswer;
+	private static int rightAnswer;
+	private static int middleAnswer;
 	private static int userValue;
 	static ArrayList newArray = new ArrayList();
 
@@ -20,6 +20,7 @@ public class BinaryTracer
 		{
 		createArray();
 		chooseTarget();
+		findTarget();
 		}
 	public static void createArray()
 		{
@@ -52,31 +53,87 @@ public class BinaryTracer
 	public static void chooseTarget()
 		{
 		target = (int) (Math.random()*newArray.size());
-		target = (int) newArray.get(target);
+		target =  (Integer) newArray.get(target);
 		System.out.println("The target is: " + target);
 		}
 	
 	public static int findTarget()
 		{
+		int counter = 0;
+		int counterRight = 0;
 		int left = 0;
 		int right = newArray.size() - 1;
-		int middle = (left + right) / 2;
-		boolean Continue = true;
-		while (Continue)
+		while (left <= right)
 			{
-			if (target < (int)newArray.get(middle))
+			int middle = (left + right) / 2;
+			System.out.println("What is the left index?");
+			Scanner userInput2 = new Scanner(System.in);
+			leftAnswer = userInput2.nextInt();
+			if (leftAnswer == left)
 				{
-				right = middle - 1;
+				System.out.println("Well done!");
+				counterRight++;
 				}
-			else if (target > (int)newArray.get(middle))
+			else 
 				{
-				left = middle + 1;
+				System.out.println("The correct answer is " + left);
+				}
+			counter++;
+			System.out.println("What is the right index?");
+			Scanner userInput3 = new Scanner(System.in);
+			rightAnswer = userInput3.nextInt();
+			if (rightAnswer == right)
+				{
+				System.out.println("Correct!");
+				counterRight++;
 				}
 			else
 				{
-				return middle;
+				System.out.println("The correct answer is " + right);
 				}
+			counter++;
+			System.out.println("What is the middle index?");
+			Scanner userInput4 = new Scanner(System.in);
+			int middleAnswer = userInput4.nextInt();	
+				if (middleAnswer== middle)
+				{
+				System.out.println("Nice!");
+				counterRight++;
+				}
+				else
+				{
+				System.out.println("The correct answer is " + middle);
+				}
+				counter++;
+			System.out.println("What is the middle value?");
+			Scanner userInput5 = new Scanner(System.in);
+			int userValue = userInput5.nextInt();
+			if (userValue == (Integer)newArray.get(middle))
+				{
+				System.out.println("Correct!");
+				counterRight++;
+				}
+			else 
+				{
+				System.out.println("The correct answer is " + (Integer)newArray.get(middle));
+				}
+			counter++;
+			if ((Integer)newArray.get(middle) == target)
+			{
+				break;
 			}
+			if (target < (Integer)newArray.get(middle))
+				{
+				right = middle - 1;
+
+				}
+			if (target > (Integer)newArray.get(middle))
+				{
+				left = middle + 1;
+
+				} 
+			}
+		System.out.println("Your score was " + counterRight + " out of " + counter);
 		return -1;
 		}
 	}
